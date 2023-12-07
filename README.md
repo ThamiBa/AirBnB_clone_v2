@@ -1,4 +1,5 @@
 ## . AirBnB clone - MySQL
+
 ### Background Context
 
 Environment variables will be your best friend for this project!
@@ -101,7 +102,7 @@ At the end of this project, you are expected to be able to [explain to anyone](h
 
 ![hbnb_step2](hbnb_step2.png)
 
-#### Comments for your SQL file:
+## Comments for your SQL file
 
 ```shell
 $ cat my_script.sql
@@ -113,8 +114,7 @@ $
 
 ### Tasks
 
-<details>
-<summary>0. Fork me if you can!</summary>
+- 0. Fork me if you can!
 
 In the industry, you will work on an existing codebase 90% of the time. Your first thoughts upon looking at it might include:
 
@@ -137,11 +137,10 @@ If you are the owner of this repository, please create a new repository named `A
 
 ***
 **Repo:**
-- GitHub repository: `AirBnB_clone_v2`
-</details>
 
-<details>
-<summary>1. Bug free!</summary>
+- GitHub repository: `AirBnB_clone_v2`
+
+- 1. Bug free!
 
 Do you remember the `unittest` module?
 
@@ -167,7 +166,7 @@ Some tests won’t be relevant for some type of storage, please skip them by usi
 
 First, you create a specific database for it (next tasks). After, you have to remember what the purpose of an unittest?
 
-**“Assert a current state (objects/data/database), do an action, and validate this action changed (or not) the state of your objects/data/database”**
+`“Assert a current state (objects/data/database), do an action, and validate this action changed (or not) the state of your objects/data/database”`
 
 For example, “you want to validate that the `create State name="California"` command in the console will add a new record in your table `states` in your database”, here steps for your unittest:
 
@@ -178,22 +177,21 @@ For example, “you want to validate that the `create State name="California"` c
 
 ***
 **Repo:**
-- GitHub repository: `AirBnB_clone_v2`
-</details>
 
-<details>
-<summary>2. Console improvements</summary>
+- GitHub repository: `AirBnB_clone_v2`
+
+- 2. Console improvements
 
 Update the `def do_create(self, arg):` function of your command interpreter (`console.py`) to allow for object creation with given parameters:
 
 - Command syntax: `create <Class name> <param 1> <param 2> <param 3>...`
 - Param syntax: `<key name>=<value>`
 - Value syntax:
-    - String: `"<value>"` => starts with a double quote
-        - any double quote inside the value must be escaped with a backslash `\`
-        - all underscores `_` must be replace by spaces . Example: You want to set the string `My little house` to the attribute `name`, your command line must be `name="My_little_house"`
-    - Float: `<unit>.<decimal>` => contains a dot `.`
-    - Integer: `<number>` => default case
+  - String: `"<value>"` => starts with a double quote
+    - any double quote inside the value must be escaped with a backslash `\`
+    - all underscores `_` must be replace by spaces . Example: You want to set the string `My little house` to the attribute `name`, your command line must be `name="My_little_house"`
+  - Float: `<unit>.<decimal>` => contains a dot `.`
+  - Integer: `<number>` => default case
 - If any parameter doesn’t fit with these requirements or can’t be recognized correctly by your program, it must be skipped
 
 **Don’t forget to add tests for this new feature!**
@@ -220,12 +218,11 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `console.py, models/, tests/`
-</details>
 
-<details>
-<summary>3. MySQL setup development</summary>
+- 3. MySQL setup development
 
 Write a script that prepares a MySQL server for the project:
 
@@ -253,12 +250,11 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `setup_mysql_dev.sql`
-</details>
 
-<details>
-<summary>4. MySQL setup test</summary>
+- 4. MySQL setup test
 
 Write a script that prepares a MySQL server for the project:
 
@@ -286,12 +282,11 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `setup_mysql_test.sql`
-</details>
 
-<details>
-<summary>5. Delete object</summary>
+- 5. Delete object
 
 Update `FileStorage`: (`models/engine/file_storage.py`)
 
@@ -365,12 +360,11 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `models/engine/file_storage.py`
-</details>
 
-<details>
-<summary>6. DBStorage - States and Cities</summary>
+- 6. DBStorage - States and Cities
 
 SQLAlchemy will be your best friend!
 
@@ -390,90 +384,90 @@ Update `BaseModel`: (`models/base_model.py`)
 - Create `Base = declarative_base()` before the class definition of `BaseModel`
 - **Note! BaseModel does /not/ inherit from Base. All other classes will inherit from BaseModel to get common values (id, `created_at`, `updated_at`), where inheriting from Base will actually cause SQLAlchemy to attempt to map it to a table.**
 - Add or replace in the class `BaseModel`:
-    - class attribute `id`
-        - represents a column containing a unique string (60 characters)
-        - can’t be null
-        - primary key
-    - class attribute `created_at`
-        - represents a column containing a datetime
-        - can’t be null
-        - default value is the current datetime (use `datetime.utcnow()`)
-    - class attribute `updated_at`
-        - represents a column containing a datetime
-        - can’t be null
-        - default value is the current datetime (use `datetime.utcnow()`)
+  - class attribute `id`
+    - represents a column containing a unique string (60 characters)
+    - can’t be null
+    - primary key
+  - class attribute `created_at`
+    - represents a column containing a datetime
+    - can’t be null
+    - default value is the current datetime (use `datetime.utcnow()`)
+  - class attribute `updated_at`
+    - represents a column containing a datetime
+    - can’t be null
+    - default value is the current datetime (use `datetime.utcnow()`)
 - Move the `models.storage.new(self)` from `def __init__(self, *args, **kwargs):` to `def save(self):` and call it just before `models.storage.save()`
 - In `def __init__(self, *args, **kwargs):`, manage `kwargs` to create instance attribute from this dictionary. Ex: `kwargs={ 'name': "California" }` => `self.name = "California"` if it’s not already the case
 - Update the `to_dict()` method of the class `BaseModel`:
-    - remove the key `_sa_instance_state` from the dictionary returned by this method **only if this key exists**
+  - remove the key `_sa_instance_state` from the dictionary returned by this method **only if this key exists**
 - Add a new public instance method: `def delete(self):` to delete the current instance from the storage (`models.storage`) by calling the method `delete`
 
 Update `City`: (`models/city.py`)
 
 - `City` inherits from `BaseModel` and `Base` (respect the order)
 - Add or replace in the class `City`:
-    - class attribute `__tablename__` -
-        - represents the table name, `cities`
-    - class attribute `name`
-        - represents a column containing a string (128 characters)
-        - can’t be null
-    - class attribute `state_id`
-        - represents a column containing a string (60 characters)
-        - can’t be null
-        - is a foreign key to `states.id`
+  - class attribute `__tablename__` -
+    - represents the table name, `cities`
+  - class attribute `name`
+    - represents a column containing a string (128 characters)
+    - can’t be null
+  - class attribute `state_id`
+    - represents a column containing a string (60 characters)
+    - can’t be null
+    - is a foreign key to `states.id`
 
 Update `State`: (`models/state.py`)
 
 - `State` inherits from `BaseModel` and `Base` (respect the order)
 - Add or replace in the class `State`:
-    - class attribute `__tablename__`
-        - represents the table name, `states`
-    - class attribute `name`
-        - represents a column containing a string (128 characters)
-        - can’t be null
-    - for `DBStorage`: class attribute `cities` must represent a relationship with the class `City`. If the `State` object is deleted, all linked `City` objects must be automatically deleted. Also, the reference from a `City` object to his `State` should be named `state`
-    - for `FileStorage`: getter attribute `cities` that returns the list of `City` instances with `state_id` equals to the current `State.id` => It will be the `FileStorage` relationship between `State` and `City`
+  - class attribute `__tablename__`
+    - represents the table name, `states`
+  - class attribute `name`
+    - represents a column containing a string (128 characters)
+    - can’t be null
+  - for `DBStorage`: class attribute `cities` must represent a relationship with the class `City`. If the `State` object is deleted, all linked `City` objects must be automatically deleted. Also, the reference from a `City` object to his `State` should be named `state`
+  - for `FileStorage`: getter attribute `cities` that returns the list of `City` instances with `state_id` equals to the current `State.id` => It will be the `FileStorage` relationship between `State` and `City`
 
 New engine `DBStorage`: (`models/engine/db_storage.py`)
 
 - Private class attributes:
-    - `__engine`: set to `None`
-    - `__session`: set to `None`
+  - `__engine`: set to `None`
+  - `__session`: set to `None`
 - Public instance methods:
-    - `__init__(self):`
-        - create the engine (`self.__engine`)
-        - the engine must be linked to the MySQL database and user created before (`hbnb_dev` and `hbnb_dev_db`):
-            - dialect: `mysql`
-            - driver: `mysqldb`
-        - all of the following values must be retrieved via environment variables:
-            - MySQL user: `HBNB_MYSQL_USER`
-            - MySQL password: `HBNB_MYSQL_PWD`
-            - MySQL host: `HBNB_MYSQL_HOST` (here = `localhost`)
-            - MySQL database: `HBNB_MYSQL_DB`
-        - don’t forget the option `pool_pre_ping=True` when you call `create_engine`
-        - drop all tables if the environment variable `HBNB_ENV` is equal to `test`
-    - `all(self, cls=None)`:
-        - query on the current database session (`self.__session`) all objects depending of the class name (argument `cls`)
-        - if `cls=None`, query all types of objects (`User`, `State`, `City`, `Amenity`, `Place` and `Review`)
-        - this method must return a dictionary: (like `FileStorage`)
-            - key = `<class-name>.<object-id>`
-            - value = object
-    - `new(self, obj)`: add the object to the current database session (`self.__session`)
-    - `save(self)`: commit all changes of the current database session (`self.__session`)
-    - `delete(self, obj=None)`: delete from the current database session `obj` if not `None`
-    - `reload(self)`:
-        - create all tables in the database (feature of SQLAlchemy) (WARNING: all classes who inherit from `Base` must be imported before calling `Base.metadata.create_all(engine)`)
-        - create the current database session (`self.__session`) from the engine (`self.__engine`) by using a [sessionmaker](https://docs.sqlalchemy.org/en/13/orm/session_api.html) - the option `expire_on_commit` must be set to `False` ; and [scoped\_session](https://docs.sqlalchemy.org/en/13/orm/contextual.html) - to make sure your Session is thread-safe
+  - `__init__(self):`
+    - create the engine (`self.__engine`)
+    - the engine must be linked to the MySQL database and user created before (`hbnb_dev` and `hbnb_dev_db`):
+      - dialect: `mysql`
+      - driver: `mysqldb`
+    - all of the following values must be retrieved via environment variables:
+      - MySQL user: `HBNB_MYSQL_USER`
+      - MySQL password: `HBNB_MYSQL_PWD`
+      - MySQL host: `HBNB_MYSQL_HOST` (here = `localhost`)
+      - MySQL database: `HBNB_MYSQL_DB`
+    - don’t forget the option `pool_pre_ping=True` when you call `create_engine`
+    - drop all tables if the environment variable `HBNB_ENV` is equal to `test`
+  - `all(self, cls=None)`:
+    - query on the current database session (`self.__session`) all objects depending of the class name (argument `cls`)
+    - if `cls=None`, query all types of objects (`User`, `State`, `City`, `Amenity`, `Place` and `Review`)
+    - this method must return a dictionary: (like `FileStorage`)
+      - key = `<class-name>.<object-id>`
+      - value = object
+  - `new(self, obj)`: add the object to the current database session (`self.__session`)
+  - `save(self)`: commit all changes of the current database session (`self.__session`)
+  - `delete(self, obj=None)`: delete from the current database session `obj` if not `None`
+  - `reload(self)`:
+    - create all tables in the database (feature of SQLAlchemy) (WARNING: all classes who inherit from `Base` must be imported before calling `Base.metadata.create_all(engine)`)
+    - create the current database session (`self.__session`) from the engine (`self.__engine`) by using a [sessionmaker](https://docs.sqlalchemy.org/en/13/orm/session_api.html) - the option `expire_on_commit` must be set to `False` ; and [scoped\_session](https://docs.sqlalchemy.org/en/13/orm/contextual.html) - to make sure your Session is thread-safe
 
 Update `__init__.py`: (`models/__init__.py`)
 
 - Add a conditional depending of the value of the environment variable `HBNB_TYPE_STORAGE`:
-    - If equal to `db`:
-        - Import `DBStorage` class in this file
-        - Create an instance of `DBStorage` and store it in the variable `storage` (the line `storage.reload()` should be executed after this instantiation)
-    - Else:
-        - Import `FileStorage` class in this file
-        - Create an instance of `FileStorage` and store it in the variable `storage` (the line `storage.reload()` should be executed after this instantiation)
+  - If equal to `db`:
+    - Import `DBStorage` class in this file
+    - Create an instance of `DBStorage` and store it in the variable `storage` (the line `storage.reload()` should be executed after this instantiation)
+  - Else:
+    - Import `FileStorage` class in this file
+    - Create an instance of `FileStorage` and store it in the variable `storage` (the line `storage.reload()` should be executed after this instantiation)
 - This “switch” will allow you to change storage type directly by using an environment variable (example below)
 
 State creation:
@@ -534,8 +528,10 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `models/base_model.py, models/city.py, models/state.py, models/engine/db_storage.py, models/__init__.py`
+
 </details>
 
 <details>
@@ -545,20 +541,20 @@ Update `User`: (`models/user.py`)
 
 - `User` inherits from `BaseModel` and `Base` (respect the order)
 - Add or replace in the class `User`:
-    - class attribute `__tablename__`
-        - represents the table name, `users`
-    - class attribute `email`
-        - represents a column containing a string (128 characters)
-        - can’t be null
-    - class attribute `password`
-        - represents a column containing a string (128 characters)
-        - can’t be null
-    - class attribute `first_name`
-        - represents a column containing a string (128 characters)
-        - can be null
-    - class attribute `last_name`
-        - represents a column containing a string (128 characters)
-        - can be null
+  - class attribute `__tablename__`
+    - represents the table name, `users`
+  - class attribute `email`
+    - represents a column containing a string (128 characters)
+    - can’t be null
+  - class attribute `password`
+    - represents a column containing a string (128 characters)
+    - can’t be null
+  - class attribute `first_name`
+    - represents a column containing a string (128 characters)
+    - can be null
+  - class attribute `last_name`
+    - represents a column containing a string (128 characters)
+    - can be null
 
 ```shell
 guillaume@ubuntu:~/AirBnB_v2$ echo 'create User email="gui@hbtn.io" password="guipwd" first_name="Guillaume" last_name="Snow"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py 
@@ -584,65 +580,64 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `models/user.py`
-</details>
 
-<details>
-<summary>8. DBStorage - Place</summary>
+- 8. DBStorage - Place
 
 Update `Place`: (`models/place.py`)
 
 - `Place` inherits from `BaseModel` and `Base` (respect the order)
 - Add or replace in the class `Place`:
-    - class attribute `__tablename__`
-        - represents the table name, `places`
-    - class attribute `city_id`
-        - represents a column containing a string (60 characters)
-        - can’t be null
-        - is a foreign key to `cities.id`
-    - class attribute `user_id`
-        - represents a column containing a string (60 characters)
-        - can’t be null
-        - is a foreign key to `users.id`
-    - class attribute `name`
-        - represents a column containing a string (128 characters)
-        - can’t be null
-    - class attribute `description`
-        - represents a column containing a string (1024 characters)
-        - can be null
-    - class attribute `number_rooms`
-        - represents a column containing an integer
-        - can’t be null
-        - default value: `0`
-    - class attribute `number_bathrooms`
-        - represents a column containing an integer
-        - can’t be null
-        - default value: `0`
-    - class attribute `max_guest`
-        - represents a column containing an integer
-        - can’t be null
-        - default value: `0`
-    - class attribute `price_by_night`
-        - represents a column containing an integer
-        - can’t be null
-        - default value: `0`
-    - class attribute `latitude`
-        - represents a column containing a float
-        - can be null
-    - class attribute `longitude`
-        - represents a column containing a float
-        - can be null
+  - class attribute `__tablename__`
+    - represents the table name, `places`
+  - class attribute `city_id`
+    - represents a column containing a string (60 characters)
+    - can’t be null
+    - is a foreign key to `cities.id`
+  - class attribute `user_id`
+    - represents a column containing a string (60 characters)
+    - can’t be null
+    - is a foreign key to `users.id`
+  - class attribute `name`
+    - represents a column containing a string (128 characters)
+    - can’t be null
+  - class attribute `description`
+    - represents a column containing a string (1024 characters)
+    - can be null
+  - class attribute `number_rooms`
+    - represents a column containing an integer
+    - can’t be null
+    - default value: `0`
+  - class attribute `number_bathrooms`
+    - represents a column containing an integer
+    - can’t be null
+    - default value: `0`
+  - class attribute `max_guest`
+    - represents a column containing an integer
+    - can’t be null
+    - default value: `0`
+  - class attribute `price_by_night`
+    - represents a column containing an integer
+    - can’t be null
+    - default value: `0`
+  - class attribute `latitude`
+    - represents a column containing a float
+    - can be null
+  - class attribute `longitude`
+    - represents a column containing a float
+    - can be null
 
 Update `User`: (`models/user.py`)
 
 - Add or replace in the class `User`:
-    - class attribute `places` must represent a relationship with the class `Place`. If the `User` object is deleted, all linked `Place` objects must be automatically deleted. Also, the reference from a `Place` object to his `User` should be named `user`
+  - class attribute `places` must represent a relationship with the class `Place`. If the `User` object is deleted, all linked `Place` objects must be automatically deleted. Also, the reference from a `Place` object to his `User` should be named `user`
 
 Update `City`: (`models/city.py`)
 
 - Add or replace in the class `City`:
-    - class attribute `places` must represent a relationship with the class `Place`. If the `City` object is deleted, all linked `Place` objects must be automatically deleted. Also, the reference from a `Place` object to his `City` should be named `cities`
+  - class attribute `places` must represent a relationship with the class `Place`. If the `City` object is deleted, all linked `Place` objects must be automatically deleted. Also, the reference from a `Place` object to his `City` should be named `cities`
 
 ```shell
 guillaume@ubuntu:~/AirBnB_v2$ echo 'create Place city_id="4b457e66-c7c8-4f63-910f-fd91c3b7140b" user_id="4f3f4b42-a4c3-4c20-a492-efff10d00c0b" name="Lovely_place" number_rooms=3 number_bathrooms=1 max_guest=6 price_by_night=120 latitude=37.773972 longitude=-122.431297' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py 
@@ -674,35 +669,34 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `models/place.py, models/user.py, models/city.py`
-</details>
 
-<details>
-<summary>9. DBStorage - Review</summary>
+- 9. DBStorage - Review
 
 Update `Review`: (`models/review.py`)
 
 - `Review` inherits from `BaseModel` and `Base` (respect the order)
 - Add or replace in the class `Review`:
-    - class attribute `__tablename__`
-        - represents the table name, `reviews`
-    - class attribute `text`
-        - represents a column containing a string (1024 characters)
-        - can’t be null
-    - class attribute `place_id`
-        - represents a column containing a string (60 characters)
-        - can’t be null
-        - is a foreign key to `places.id`
-    - class attribute `user_id`
-        - represents a column containing a string (60 characters)
-        - can’t be null
-        - is a foreign key to `users.id`
+  - class attribute `__tablename__`
+    - represents the table name, `reviews`
+  - class attribute `text`
+    - represents a column containing a string (1024 characters)
+    - can’t be null
+  - class attribute `place_id`
+    - represents a column containing a string (60 characters)
+    - can’t be null
+    - is a foreign key to `places.id`
+  - class attribute `user_id`
+    - represents a column containing a string (60 characters)
+    - can’t be null
+    - is a foreign key to `users.id`
 
 Update `User`: (`models/user.py`)
 
 - Add or replace in the class `User`:
-    - class attribute `reviews` must represent a relationship with the class `Review`. If the `User` object is deleted, all linked `Review` objects must be automatically deleted. Also, the reference from a `Review` object to his `User` should be named `user`
+  - class attribute `reviews` must represent a relationship with the class `Review`. If the `User` object is deleted, all linked `Review` objects must be automatically deleted. Also, the reference from a `Review` object to his `User` should be named `user`
 
 Update `Place`: (`models/place.py`)
 
@@ -737,37 +731,36 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `models/review.py, models/user.py, models/place.py`
-</details>
 
-<details>
-<summary>10. DBStorage - Amenity... and BOOM!</summary>
+- 10. DBStorage - Amenity... and BOOM!
 
 Update `Amenity`: (`models/amenity.py`)
 
 - `Amenity` inherits from `BaseModel` and `Base` (respect the order)
 - Add or replace in the class `Amenity`:
-    - class attribute `__tablename__`
-        - represents the table name, `amenities`
-    - class attribute `name`
-        - represents a column containing a string (128 characters)
-        - can’t be null
-    - class attribute `place_amenities` must represent a relationship [Many-To-Many](https://docs.sqlalchemy.org/en/13/orm/basic_relationships.html") between the class `Place` and `Amenity`. Please see below more detail: `place_amenity` in the `Place` update
+  - class attribute `__tablename__`
+    - represents the table name, `amenities`
+  - class attribute `name`
+    - represents a column containing a string (128 characters)
+    - can’t be null
+  - class attribute `place_amenities` must represent a relationship [Many-To-Many](https://docs.sqlalchemy.org/en/13/orm/basic_relationships.html") between the class `Place` and `Amenity`. Please see below more detail: `place_amenity` in the `Place` update
 
 Update `Place`: (`models/place.py`)
 
 - Add an instance of [SQLAlchemy Table](https://docs.sqlalchemy.org/en/13/core/metadata.html) called `place_amenity` for creating the relationship [Many-To-Many](https://docs.sqlalchemy.org/en/13/orm/basic_relationships.html) between `Place` and `Amenity`:
-    - table name `place_amenity`
-    - `metadata = Base.metadata`
-    - 2 columns:
-        - `place_id`, a string of 60 characters foreign key of `places.id`, primary key in the table and never null
-        - `amenity_id`, a string of 60 characters foreign key of `amenities.id`, primary key in the table and never null
+  - table name `place_amenity`
+  - `metadata = Base.metadata`
+  - 2 columns:
+    - `place_id`, a string of 60 characters foreign key of `places.id`, primary key in the table and never null
+    - `amenity_id`, a string of 60 characters foreign key of `amenities.id`, primary key in the table and never null
 - Update `Place` class:
-    - for `DBStorage`: class attribute `amenities` must represent a relationship with the class `Amenity` but also as `secondary` to `place_amenity` with option `viewonly=False` (`place_amenity` has been define previously)
-    - for `FileStorage`:
-        - Getter attribute `amenities` that returns the list of `Amenity` instances based on the attribute `amenity_ids` that contains all `Amenity.id` linked to the `Place`
-        - Setter attribute `amenities` that handles `append` method for adding an `Amenity.id` to the attribute `amenity_ids`. This method should accept only `Amenity` object, otherwise, do nothing.
+  - for `DBStorage`: class attribute `amenities` must represent a relationship with the class `Amenity` but also as `secondary` to `place_amenity` with option `viewonly=False` (`place_amenity` has been define previously)
+  - for `FileStorage`:
+    - Getter attribute `amenities` that returns the list of `Amenity` instances based on the attribute `amenity_ids` that contains all `Amenity.id` linked to the `Place`
+    - Setter attribute `amenities` that handles `append` method for adding an `Amenity.id` to the attribute `amenity_ids`. This method should accept only `Amenity` object, otherwise, do nothing.
 
 #### What’s a `Many-to-Many` relationship?
 
@@ -903,11 +896,12 @@ guillaume@ubuntu:~/AirBnB_v2$
 
 ***
 **Repo:**
+
 - GitHub repository: `AirBnB_clone_v2`
 - File: `models/amenity.py, models/place.py`
-</details>
 
 ***
-### AUTHORS:
-- Meriem Ben Ayad
+
+### AUTHORS
+
 - Thami Baladi
