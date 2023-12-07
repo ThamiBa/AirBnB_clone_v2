@@ -1,6 +1,6 @@
-## . AirBnB clone - MySQL
+# . AirBnB clone - MySQL
 
-### Background Context
+## Background Context
 
 Environment variables will be your best friend for this project!
 
@@ -532,10 +532,7 @@ guillaume@ubuntu:~/AirBnB_v2$
 - GitHub repository: `AirBnB_clone_v2`
 - File: `models/base_model.py, models/city.py, models/state.py, models/engine/db_storage.py, models/__init__.py`
 
-</details>
-
-<details>
-<summary>7. DBStorage - User</summary>
+- 7. DBStorage - User
 
 Update `User`: (`models/user.py`)
 
