@@ -5,11 +5,11 @@
 if ! command -v nginx &> /dev/null
 then
 	echo "nginx is not installed. Installing now..."
-	# Update package lists
+	# Update-package-lists
 	sudo apt-get -y update
-	# Install nginx
+	# Install-nginx
 	sudo apt-get install -y nginx
-	# start nginx
+	# start-nginx
 	sudo service nginx start
 else
 	echo "nginx is already installed"
